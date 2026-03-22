@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>House of Karigari | Crafting Change with Every Thread</title>
+  <!-- Google Fonts & Simple CSS Reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FEFAF5;
+      color: #2D2A24;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, .logo, .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* color palette earthy */
+    :root {
+      --cream: #FDF8F0;
+      --beige: #EBDCCB;
+      --brown: #A67B5A;
+      --deep-green: #526E48;
+      --olive: #6C8C5E;
+      --charcoal: #2D2A24;
+      --warm-white: #FFFBF5;
+    }
+
+    /* Navbar */
+    nav {
+      background: var(--warm-white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(2px);
+      background-color: rgba(255, 251, 245, 0.96);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      text-decoration: none;
+      color: var(--deep-green);
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--charcoal);
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--brown);
+      border-bottom: 2px solid var(--olive);
+      padding-bottom: 4px;
+    }
+    .mobile-menu {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--deep-green);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--deep-green);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #3b5532;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(82, 110, 72, 0.2);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--deep-green);
+      color: var(--deep-green);
+      padding: 10px 26px;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn-outline:hover {
+      background: var(--deep-green);
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(120deg, #F9F2E7 0%, #F0E5D8 100%);
+      padding: 5rem 0 4rem;
+    }
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      color: var(--deep-green);
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin: 1.5rem 0;
+      color: #4a4238;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-image {
+      flex: 1;
+      text-align: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 40px;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+    }
+
+    /* section titles */
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--deep-green);
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      width: 80px;
+      height: 3px;
+      background: var(--brown);
+      display: block;
+      margin: 12px auto 0;
+      border-radius: 4px;
+    }
+
+    /* product categories grid */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .category-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+      cursor: pointer;
+    }
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 36px rgba(0,0,0,0.1);
+    }
+    .category-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+    .category-card:hover img {
+      transform: scale(1.02);
+    }
+    .cat-info {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .cat-info h3 {
+      font-size: 1.5rem;
+      color: var(--brown);
+    }
+    .cat-info p {
+      margin: 8px 0;
+      color: #5a5248;
+    }
+    .price {
+      font-weight: 700;
+      color: var(--deep-green);
+      margin-top: 8px;
+    }
+
+    /* Impact stats */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      background: var(--beige);
+      padding: 3rem 2rem;
+      border-radius: 60px;
+      margin: 2rem 0;
+    }
+    .stat {
+      text-align: center;
+      min-width: 160px;
+    }
+    .stat i {
+      font-size: 2.5rem;
+      color: var(--deep-green);
+    }
+    .stat h3 {
+      font-size: 2.2rem;
+      margin: 0.5rem 0;
+    }
+
+    /* testimonials */
+    .testimonials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .testimonial-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 32px;
+      flex: 1;
+      min-width: 260px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border-left: 6px solid var(--olive);
+    }
+    .testimonial-card i {
+      color: var(--brown);
+      font-size: 1.8rem;
+      opacity: 0.6;
+    }
+
+    /* Gallery / craft process */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    .gallery-item {
+      border-radius: 28px;
+      overflow: hidden;
+      height: 260px;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(82, 110, 72, 0.8);
+      color: white;
+      width: 100%;
+      padding: 12px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Contact Form */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      background: white;
+      padding: 2rem;
+      border-radius: 48px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.05);
+    }
+    .contact-form {
+      flex: 1;
+    }
+    .contact-info {
+      flex: 1;
+      background: #F4EDE3;
+      padding: 2rem;
+      border-radius: 32px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px 18px;
+      margin: 10px 0;
+      border: 1px solid #ddd2c4;
+      border-radius: 30px;
+      font-family: 'Inter', sans-serif;
+    }
+    textarea {
+      border-radius: 24px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    footer {
+      background: #2D2A24;
+      color: #EBDCCB;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .footer-col p {
+      max-width: 280px;
+      margin-top: 10px;
+    }
+    .social-icons a {
+      color: #EBDCCB;
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+    .social-icons a:hover {
+      color: var(--beige);
+    }
+
+    /* responsive */
+    @media (max-width: 880px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: var(--warm-white);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        gap: 1.5rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-menu {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .container {
+        padding: 0 20px;
+      }
+    }
+    .hidden {
+      display: none;
+    }
+    img {
+      max-width: 100%;
+    }
+    .product-filter {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--brown);
+      padding: 6px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: 500;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--deep-green);
+      color: white;
+      border-color: var(--deep-green);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo"><a href="index.html">House of Karigari</a></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active-nav">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#products" class="nav-link">Products</a></li>
+        <li><a href="#impact" class="nav-link">Impact</a></li>
+        <li><a href="#gallery" class="nav-link">Craft Process</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Home Hero Section -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1>Crafting Change<br>with Every Thread</h1>
+          <p>Empowering specially-abled children through handcrafted, eco-friendly jute products — bags, home decor, hampers & lifestyle accessories.</p>
+          <div class="hero-btns">
+            <a href="#products" class="btn-primary">Shop Now</a>
+            <a href="#about" class="btn-outline">Learn More</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://placehold.co/600x500/EBDCCB/A67B5A?text=Jute+Craftsmanship" alt="Handcrafted Jute">
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="container" style="margin: 5rem auto;">
+      <h2 class="section-title">Our Story</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+        <div style="flex:1">
+          <img src="https://placehold.co/500x400/F0E5D8/526E48?text=Artisan+Moments" style="border-radius: 36px; width:100%;" alt="artisans">
+        </div>
+        <div style="flex:1">
+          <p style="font-size:1.1rem; margin-bottom:1rem;">House of Karigari was born from a deep desire to merge sustainability with social impact. We work with specially-abled children and young adults, training them in the art of jute craftsmanship — weaving, stitching, and designing premium eco-friendly products.</p>
+          <p style="margin-bottom:1rem;">Every jute bag, storage basket, gift hamper, and home decor piece tells a story of dignity, skill, and hope. Our mission is to create livelihoods while protecting the planet.</p>
+          <h3 style="color:var(--brown); margin-top:1rem;">Mission & Vision</h3>
+          <p>🌱 Empower 500+ specially-abled artisans by 2027<br>🌍 Zero-waste, plastic-free, 100% biodegradable jute products<br>❤️ Craftsmanship meets compassion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products / Collections (Category Variety) -->
+    <section id="products" class="container" style="margin: 5rem auto;">
+      <h2 class="section-title">Our Jute Collections</h2>
+      <div class="product-filter" id="filterGroup">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="bags">Jute Bags</button>
+        <button class="filter-btn" data-cat="decor">Home Decor</button>
+        <button class="filter-btn" data-cat="storage">Storage</button>
+        <button class="filter-btn" data-cat="gift">Gift Hampers</button>
+        <button class="filter-btn" data-cat="accessories">Accessories</button>
+      </div>
+      <div class="categories-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Impact Page (stats + testimonials) -->
+    <section id="impact" style="background: #F8F2EA; padding: 4rem 0;">
+      <div class="container">
+        <h2 class="section-title">Impact That Matters</h2>
+        <div class="stats-row">
+          <div class="stat"><i class="fas fa-child"></i><h3>85+</h3><p>Specially-abled artisans trained</p></div>
+          <div class="stat"><i class="fas fa-seedling"></i><h3>12 Tonnes</h3><p>Plastic replaced by jute</p></div>
+          <div class="stat"><i class="fas fa-hand-holding-heart"></i><h3>4 Villages</h3><p>Empowered communities</p></div>
+        </div>
+        <div class="testimonials">
+          <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>"Working with House of Karigari gave my son a purpose. He now creates beautiful jute baskets with pride."</p><h4>- Meera, Parent</h4></div>
+          <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>"The jute hampers are gorgeous, and knowing they support inclusion makes every purchase meaningful."</p><h4>- Rohan, Regular Customer</h4></div>
+          <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>"I love my new jute tote! Eco-friendly and empowers young artists."</p><h4>- Sneha, Influencer</h4></div>
+        </div>
+        <div style="margin-top: 3rem; text-align: center;">
+          <a href="#contact" class="btn-primary">Support Our Mission</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery / Craft Process -->
+    <section id="gallery" class="container" style="margin: 5rem auto;">
+      <h2 class="section-title">Behind the Craft</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://placehold.co/400x300/EBDCCB/2D2A24?text=Weaving+Jute" alt="weaving"><div class="gallery-caption">Handweaving Traditions</div></div>
+        <div class="gallery-item"><img src="https://placehold.co/400x300/D9CAB8/526E48?text=Artisan+at+Work" alt="artisan"><div class="gallery-caption">Skilled Artisans</div></div>
+        <div class="gallery-item"><img src="https://placehold.co/400x300/CBBFAE/A67B5A?text=Natural+Dyeing" alt="dyeing"><div class="gallery-caption">Natural Dye Process</div></div>
+        <div class="gallery-item"><img src="https://placehold.co/400x300/EFE2D4/6C8C5E?text=Finishing+Touch" alt="finishing"><div class="gallery-caption">Quality Finishing</div></div>
+      </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="container" style="margin: 5rem auto;">
+      <h2 class="section-title">Connect with Us</h2>
+      <div class="contact-wrapper">
+        <div class="contact-form">
+          <form id="contactForm">
+            <input type="text" placeholder="Your Name" required id="nameInput">
+            <input type="email" placeholder="Email Address" required id="emailInput">
+            <textarea rows="4" placeholder="Your message..." required id="msgInput"></textarea>
+            <button type="submit" class="btn-primary" style="width:100%">Send Message <i class="fas fa-heart"></i></button>
+            <p id="formFeedback" style="margin-top:10px; font-size:0.9rem;"></p>
+          </form>
+        </div>
+        <div class="contact-info">
+          <h3>Reach Out</h3>
+          <p><i class="fas fa-envelope"></i> hello@houseofkarigari.org</p>
+          <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+          <p><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan, India</p>
+          <div class="social-icons" style="margin-top: 1.5rem;">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-col">
+        <h3>House of Karigari</h3>
+        <p>Crafting change with every thread — sustainable jute products made by specially-abled artisans.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <p><a href="#about" style="color:#EBDCCB; text-decoration:none;">About Us</a></p>
+        <p><a href="#impact" style="color:#EBDCCB; text-decoration:none;">Our Impact</a></p>
+        <p><a href="#products" style="color:#EBDCCB; text-decoration:none;">Shop</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow the Movement</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <p>© 2025 — Empowering hands, healing earth.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Product database (variety of jute products)
+    const products = [
+      { id:1, name:"Handwoven Jute Tote", category:"bags", price:"₹899", desc:"Eco-friendly everyday bag", img:"https://placehold.co/400x300/EBDCCB/526E48?text=Jute+Tote" },
+      { id:2, name:"Boho Jute Sling", category:"bags", price:"₹749", desc:"Stylish crossbody", img:"https://placehold.co/400x300/DCCBB4/A67B5A?text=Jute+Sling" },
+      { id:3, name:"Jute Macrame Wall Hanging", category:"decor", price:"₹1299", desc:"Hand-knotted boho decor", img:"https://placehold.co/400x300/F5E7D6/6C8C5E?text=Wall+Hanging" },
+      { id:4, name:"Woven Storage Basket (Set of 2)", category:"storage", price:"₹1599", desc:"Organize with style", img:"https://placehold.co/400x300/E2D4C2/526E48?text=Storage+Basket" },
+      { id:5, name:"Eco Gift Hamper", category:"gift", price:"₹2499", desc:"Jute bag + decor + treats", img:"https://placehold.co/400x300/CABDA9/A67B5A?text=Gift+Hamper" },
+      { id:6, name:"Jute & Leather Journal", category:"accessories", price:"₹599", desc:"Handbound notebook", img:"https://placehold.co/400x300/DBCEBA/6C8C5E?text=Jute+Journal" },
+      { id:7, name:"Rustic Jute Cushion Cover", category:"decor", price:"₹699", desc:"Textured eco-cushion", img:"https://placehold.co/400x300/F0E1D0/526E48?text=Cushion+Cover" },
+      { id:8, name:"Round Jute Floor Rug", category:"decor", price:"₹1899", desc:"Natural fiber rug", img:"https://placehold.co/400x300/EBE0D2/A67B5A?text=Jute+Rug" },
+      { id:9, name:"Collapsible Jute Laundry Basket", category:"storage", price:"₹1299", desc:"Foldable & sturdy", img:"https://placehold.co/400x300/D9CCBA/6C8C5E?text=Laundry+Basket" },
+      { id:10, name:"Jute Pencil Case Set", category:"accessories", price:"₹399", desc:"Stationery organiser", img:"https://placehold.co/400x300/E6D8C8/526E48?text=Pencil+Case" },
+    ];
+
+    function renderProducts(filter = "all") {
+      const container = document.getElementById("productsGrid");
+      if(!container) return;
+      let filtered = filter === "all" ? products : products.filter(p => p.category === filter);
+      if(filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; grid-column:1/-1;">No products in this category, explore others!</div>`;
+        return;
+      }
+      container.innerHTML = filtered.map(prod => `
+        <div class="category-card">
+          <img src="${prod.img}" alt="${prod.name}" loading="lazy">
+          <div class="cat-info">
+            <h3>${prod.name}</h3>
+            <p>${prod.desc}</p>
+            <div class="price">${prod.price}</div>
+            <button class="btn-outline" style="margin-top:12px; padding:6px 20px;">Shop Now</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter buttons active state
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const category = btn.getAttribute('data-cat');
+        renderProducts(category);
+      });
+    });
+
+    // Mobile menu toggle
+    const mobileIcon = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+    mobileIcon.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // smooth scroll & active nav highlight
+    const sections = document.querySelectorAll('section, #home, #about, #products, #impact, #gallery, #contact');
+    const navItems = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if(pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navItems.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // contact form message simulation
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('nameInput')?.value;
+        const email = document.getElementById('emailInput')?.value;
+        const msg = document.getElementById('msgInput')?.value;
+        const feedback = document.getElementById('formFeedback');
+        if(name && email && msg) {
+          feedback.innerHTML = `✨ Thank you ${name}! We'll get back to you soon. ✨`;
+          feedback.style.color = "#526E48";
+          contactForm.reset();
+          setTimeout(() => { feedback.innerHTML = ""; }, 4000);
+        } else {
+          feedback.innerHTML = "Please fill all fields.";
+          feedback.style.color = "#b1624b";
+        }
+      });
+    }
+
+    // initial product render
+    renderProducts("all");
+    // smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if(targetId === "#" || targetId === "") return;
+        const targetElem = document.querySelector(targetId);
+        if(targetElem) {
+          e.preventDefault();
+          targetElem.scrollIntoView({ behavior: "smooth" });
+          if(navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
